@@ -1,0 +1,893 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EvalúaVida – La Evaluación como Ecosistema de Inclusión</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Lato:wght@300;400;700&family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --verde: #2d6a4f;
+    --verde-claro: #52b788;
+    --verde-menta: #b7e4c7;
+    --tierra: #a08060;
+    --crema: #fdf8f2;
+    --blanco: #ffffff;
+    --gris-suave: #f5f0e8;
+    --texto: #2c2c2c;
+    --texto-claro: #666;
+    --dorado: #c9973a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--crema);
+    color: var(--texto);
+    line-height: 1.8;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0;
+    background: rgba(45,106,79,0.97);
+    backdrop-filter: blur(8px);
+    z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 40px;
+    height: 62px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.18);
+  }
+  .nav-logo {
+    font-family: 'Dancing Script', cursive;
+    color: var(--verde-menta);
+    font-size: 1.7rem;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 6px; flex-wrap: wrap; }
+  .nav-links a {
+    color: rgba(255,255,255,0.85);
+    text-decoration: none;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 6px 10px;
+    border-radius: 4px;
+    transition: all .2s;
+    font-weight: 700;
+  }
+  .nav-links a:hover { background: var(--verde-claro); color: #fff; }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #1b4332 0%, #2d6a4f 50%, #40916c 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 100px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.12);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: var(--verde-menta);
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 6px 20px;
+    border-radius: 30px;
+    margin-bottom: 28px;
+    font-weight: 700;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.6rem, 7vw, 5.5rem);
+    color: #fff;
+    line-height: 1.08;
+    margin-bottom: 14px;
+    font-weight: 900;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--verde-menta);
+  }
+  .hero-sub {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.2rem, 3vw, 1.8rem);
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 32px;
+  }
+  .hero-desc {
+    max-width: 640px;
+    color: rgba(255,255,255,0.82);
+    font-size: 1.05rem;
+    line-height: 1.9;
+    margin-bottom: 40px;
+  }
+  .hero-cta {
+    display: inline-block;
+    background: var(--dorado);
+    color: #fff;
+    padding: 14px 38px;
+    border-radius: 50px;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    transition: transform .2s, box-shadow .2s;
+    box-shadow: 0 6px 24px rgba(201,151,58,0.4);
+  }
+  .hero-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 32px rgba(201,151,58,0.5); }
+  .hero-scroll {
+    position: absolute; bottom: 32px;
+    animation: bounce 2s infinite;
+    font-size: 1.5rem; color: rgba(255,255,255,0.5);
+  }
+  @keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+  /* ── SECTIONS ── */
+  section { padding: 80px 24px; }
+  .container { max-width: 900px; margin: 0 auto; }
+  .container-wide { max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    display: inline-block;
+    background: var(--verde-menta);
+    color: var(--verde);
+    font-size: 0.72rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    font-weight: 700;
+    padding: 4px 16px;
+    border-radius: 20px;
+    margin-bottom: 18px;
+  }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    color: var(--verde);
+    line-height: 1.2;
+    margin-bottom: 24px;
+  }
+  .section-title span { color: var(--dorado); }
+
+  /* ── INTRO / JUSTIFICACIÓN ── */
+  #justificacion { background: var(--blanco); }
+  .justif-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    align-items: center;
+    margin-top: 48px;
+  }
+  @media(max-width:680px){ .justif-grid{ grid-template-columns:1fr; } }
+  .justif-text p { color: var(--texto-claro); margin-bottom: 18px; font-size: 1.05rem; }
+  .justif-visual {
+    background: linear-gradient(135deg, #2d6a4f, #40916c);
+    border-radius: 24px;
+    padding: 40px 32px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(45,106,79,0.25);
+  }
+  .justif-visual .icon { font-size: 3.5rem; margin-bottom: 16px; }
+  .justif-visual h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+  .justif-visual p { color: rgba(255,255,255,0.82); font-size: 0.95rem; }
+
+  /* ── OBJETIVOS ── */
+  #objetivos { background: var(--gris-suave); }
+  .obj-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .obj-card {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 28px 24px;
+    border-left: 4px solid var(--verde-claro);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.06);
+    transition: transform .2s;
+  }
+  .obj-card:hover { transform: translateY(-4px); }
+  .obj-card .num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    color: var(--verde-menta);
+    font-weight: 900;
+    line-height: 1;
+    margin-bottom: 10px;
+  }
+  .obj-card h4 { color: var(--verde); font-size: 1rem; margin-bottom: 8px; font-weight: 700; }
+  .obj-card p { color: var(--texto-claro); font-size: 0.9rem; }
+
+  /* ── MARCO TEÓRICO ── */
+  #marco { background: var(--blanco); }
+  .autores-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .autor-card {
+    background: linear-gradient(145deg, var(--gris-suave), var(--blanco));
+    border-radius: 16px;
+    padding: 28px 24px;
+    border-top: 3px solid var(--dorado);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    transition: box-shadow .2s;
+  }
+  .autor-card:hover { box-shadow: 0 8px 32px rgba(0,0,0,0.12); }
+  .autor-card .autor-emoji { font-size: 2.4rem; margin-bottom: 12px; }
+  .autor-card h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--verde);
+    font-size: 1.15rem;
+    margin-bottom: 8px;
+  }
+  .autor-card p { color: var(--texto-claro); font-size: 0.9rem; }
+
+  /* ── CASO INSPIRADOR ── */
+  #caso { background: linear-gradient(160deg, #1b4332 0%, #2d6a4f 100%); color: #fff; }
+  #caso .section-title { color: var(--verde-menta); }
+  .caso-box {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 40px;
+    backdrop-filter: blur(6px);
+  }
+  .caso-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.6rem;
+    color: var(--verde-menta);
+    margin-bottom: 20px;
+  }
+  .caso-box p { color: rgba(255,255,255,0.85); margin-bottom: 16px; font-size: 1.02rem; }
+  .caso-tag {
+    display: inline-block;
+    background: var(--dorado);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+  }
+
+  /* ── TÉCNICA ── */
+  #tecnica { background: var(--gris-suave); }
+  .tecnica-box {
+    background: var(--blanco);
+    border-radius: 20px;
+    padding: 40px;
+    margin-top: 40px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.08);
+    border-left: 6px solid var(--verde-claro);
+  }
+  .tecnica-box h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    color: var(--verde);
+    margin-bottom: 16px;
+  }
+  .tecnica-box p { color: var(--texto-claro); margin-bottom: 14px; }
+  .momentos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 24px;
+  }
+  @media(max-width:600px){ .momentos{ grid-template-columns:1fr; } }
+  .momento {
+    background: linear-gradient(135deg, var(--verde), var(--verde-claro));
+    border-radius: 12px;
+    padding: 20px;
+    color: #fff;
+    text-align: center;
+  }
+  .momento .emoji { font-size: 2rem; margin-bottom: 8px; }
+  .momento h5 { font-size: 0.9rem; font-weight: 700; margin-bottom: 6px; }
+  .momento p { font-size: 0.82rem; color: rgba(255,255,255,0.88); }
+
+  /* ── INSTRUMENTOS ── */
+  #instrumentos { background: var(--blanco); }
+  .instrumento {
+    background: var(--gris-suave);
+    border-radius: 20px;
+    overflow: hidden;
+    margin-bottom: 40px;
+    box-shadow: 0 6px 30px rgba(0,0,0,0.07);
+    transition: box-shadow .2s;
+  }
+  .instrumento:hover { box-shadow: 0 12px 40px rgba(0,0,0,0.13); }
+  .instr-header {
+    padding: 28px 36px;
+    display: flex; align-items: center; gap: 20px;
+    flex-wrap: wrap;
+  }
+  .instr-header.verde { background: linear-gradient(135deg, #2d6a4f, #40916c); color: #fff; }
+  .instr-header.dorado { background: linear-gradient(135deg, #b07d27, #d4a843); color: #fff; }
+  .instr-header.azul { background: linear-gradient(135deg, #1d3557, #457b9d); color: #fff; }
+  .instr-header.violeta { background: linear-gradient(135deg, #6b2d8b, #9b59b6); color: #fff; }
+  .instr-num {
+    width: 56px; height: 56px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    font-weight: 900;
+    flex-shrink: 0;
+  }
+  .instr-header-text h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .instr-header-text p { font-size: 0.88rem; opacity: 0.85; }
+  .instr-body { padding: 32px 36px; }
+  .ficha-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .ficha-item {
+    background: var(--blanco);
+    border-radius: 10px;
+    padding: 14px 18px;
+    border-left: 3px solid var(--verde-claro);
+  }
+  .ficha-item .label {
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--texto-claro);
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+  .ficha-item .val { font-weight: 700; color: var(--verde); font-size: 0.9rem; }
+  .instr-body h4 {
+    font-family: 'Playfair Display', serif;
+    color: var(--verde);
+    font-size: 1.1rem;
+    margin-bottom: 12px;
+    margin-top: 24px;
+  }
+  .instr-body p { color: var(--texto-claro); margin-bottom: 12px; font-size: 0.95rem; }
+  .instr-body ul { padding-left: 20px; color: var(--texto-claro); }
+  .instr-body ul li { margin-bottom: 8px; font-size: 0.93rem; }
+  .dua-chips {
+    display: flex; flex-wrap: wrap; gap: 10px;
+    margin-top: 16px;
+  }
+  .dua-chip {
+    background: linear-gradient(135deg, #b07d27, #d4a843);
+    color: #fff;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 700;
+  }
+  .inno-badge {
+    display: inline-block;
+    background: var(--verde);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    padding: 4px 14px;
+    border-radius: 20px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+  .instr-momentos {
+    display: grid; grid-template-columns: repeat(3,1fr); gap: 14px;
+    margin-top: 20px;
+  }
+  @media(max-width:540px){ .instr-momentos{grid-template-columns:1fr;} }
+  .instr-momento {
+    background: var(--blanco);
+    border-radius: 10px;
+    padding: 16px;
+    border-top: 3px solid var(--verde-claro);
+    text-align: center;
+  }
+  .instr-momento .m-title {
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--verde);
+    margin-bottom: 8px;
+  }
+  .instr-momento p { font-size: 0.83rem; color: var(--texto-claro); }
+
+  /* ── CONCLUSIONES ── */
+  #conclusiones { background: var(--gris-suave); }
+  .concl-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+  }
+  .concl-card {
+    background: var(--blanco);
+    border-radius: 16px;
+    padding: 28px 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+    border-bottom: 3px solid var(--verde-claro);
+  }
+  .concl-card .icon { font-size: 2.2rem; margin-bottom: 14px; }
+  .concl-card h4 { color: var(--verde); font-size: 1rem; font-weight: 700; margin-bottom: 10px; }
+  .concl-card p { color: var(--texto-claro); font-size: 0.9rem; }
+
+  /* ── REFERENCIAS ── */
+  #referencias { background: var(--blanco); }
+  .ref-list { list-style: none; margin-top: 32px; }
+  .ref-list li {
+    padding: 14px 18px 14px 24px;
+    border-left: 3px solid var(--verde-menta);
+    margin-bottom: 16px;
+    background: var(--gris-suave);
+    border-radius: 0 10px 10px 0;
+    font-size: 0.9rem;
+    color: var(--texto-claro);
+  }
+  .ref-list li strong { color: var(--verde); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #1b4332;
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 40px 24px;
+  }
+  footer .logo {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2rem;
+    color: var(--verde-menta);
+    margin-bottom: 10px;
+  }
+  footer p { font-size: 0.85rem; margin-bottom: 6px; }
+  footer a { color: var(--verde-menta); text-decoration: none; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 60px; height: 4px;
+    background: linear-gradient(90deg, var(--verde-claro), var(--dorado));
+    border-radius: 2px;
+    margin: 16px 0 32px;
+  }
+
+  /* ── Animations ── */
+  @keyframes fadeUp {
+    from { opacity:0; transform: translateY(24px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .hero h1, .hero-sub, .hero-desc, .hero-cta {
+    animation: fadeUp 0.8s ease both;
+  }
+  .hero-sub { animation-delay: .1s; }
+  .hero-desc { animation-delay: .2s; }
+  .hero-cta { animation-delay: .3s; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#inicio">EvalúaVida</a>
+  <div class="nav-links">
+    <a href="#justificacion">Justificación</a>
+    <a href="#objetivos">Objetivos</a>
+    <a href="#marco">Marco Teórico</a>
+    <a href="#caso">Caso</a>
+    <a href="#tecnica">Técnica</a>
+    <a href="#instrumentos">Instrumentos</a>
+    <a href="#conclusiones">Conclusiones</a>
+    <a href="#referencias">Referencias</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="inicio" class="hero">
+  <div class="hero-badge">Universidad Católica Luis Amigó · Facultad de Educación</div>
+  <h1>EvalúaVida<br><em>Evaluar es vivir,</em><br>no juzgar</h1>
+  <p class="hero-sub">La Evaluación como Ecosistema de Inclusión</p>
+  <p class="hero-desc">Un espacio donde la evaluación deja de ser una sentencia y se convierte en un diálogo entre seres humanos que aprenden juntos. Aquí la diversidad no es un obstáculo, es la riqueza que alimenta el aprendizaje.</p>
+  <a class="hero-cta" href="#justificacion">Explorar el blog ↓</a>
+  <div class="hero-scroll">↓</div>
+</section>
+
+<!-- JUSTIFICACIÓN -->
+<section id="justificacion">
+  <div class="container">
+    <span class="section-label">El Antes · Fase 1</span>
+    <h2 class="section-title">Justificación <span>Crítica</span></h2>
+    <div class="divider"></div>
+    <div class="justif-grid">
+      <div class="justif-text">
+        <p>La evaluación educativa ha sido históricamente concebida como un instrumento de medición y control que clasifica, selecciona y, en muchos casos, excluye a quienes no encajan en los moldes del sistema hegemónico. Esta concepción reduccionista ha generado prácticas evaluativas deshumanizadas que ignoran la complejidad del ser humano y la diversidad de formas en que este aprende, siente y se expresa.</p>
+        <p>Este blog surge como una respuesta pedagógica y ética a dicha realidad. Propone una mirada transformadora de la evaluación: no como fin en sí misma, sino como un proceso reflexivo, continuo y dialógico que reconoce al estudiante como sujeto activo, con historia, emociones y potencial ilimitado.</p>
+        <p>Desde los postulados de Freire, Vygotsky y los principios del Diseño Universal para el Aprendizaje (DUA), este espacio digital busca demostrar que evaluar puede —y debe— ser un acto de amor pedagógico: un ecosistema donde la inclusión, la equidad y el reconocimiento de la diversidad sean los pilares que sostienen la educación del siglo XXI.</p>
+      </div>
+      <div class="justif-visual">
+        <div class="icon">🌱</div>
+        <h3>"La evaluación debe ser una semilla, no una tijera."</h3>
+        <p>Evaluar para hacer crecer, no para podar. Un ecosistema educativo donde cada estudiante florece a su propio ritmo y desde su propia raíz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- OBJETIVOS -->
+<section id="objetivos">
+  <div class="container">
+    <span class="section-label">Propósito del Blog</span>
+    <h2 class="section-title">Objetivos del <span>Proyecto</span></h2>
+    <div class="divider"></div>
+    <div class="obj-cards">
+      <div class="obj-card">
+        <div class="num">OG</div>
+        <h4>Objetivo General</h4>
+        <p>Diseñar un blog educativo que proponga instrumentos de evaluación inclusivos, creativos y situados, basados en los principios del DUA y perspectivas pedagógicas críticas, para transformar las prácticas evaluativas en el aula.</p>
+      </div>
+      <div class="obj-card">
+        <div class="num">01</div>
+        <h4>Reflexión Crítica</h4>
+        <p>Desarrollar una mirada crítica y transformadora sobre la evaluación como proceso humanizador que reconoce la diversidad de aprendizajes.</p>
+      </div>
+      <div class="obj-card">
+        <div class="num">02</div>
+        <h4>Diseño Inclusivo</h4>
+        <p>Crear instrumentos evaluativos que garanticen múltiples formas de representación, acción y expresión conforme al DUA.</p>
+      </div>
+      <div class="obj-card">
+        <div class="num">03</div>
+        <h4>Innovación Pedagógica</h4>
+        <p>Proponer alternativas creativas que rompan con la hegemonía del examen tradicional y aprovechen las posibilidades del entorno digital.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARCO TEÓRICO -->
+<section id="marco">
+  <div class="container">
+    <span class="section-label">Fundamentación</span>
+    <h2 class="section-title">Marco <span>Teórico</span></h2>
+    <div class="divider"></div>
+    <p style="color:var(--texto-claro); max-width:700px; margin-bottom:8px;">La propuesta evaluativa de este blog se sustenta en autores que comprenden la evaluación como un proceso integral, situado y profundamente humano.</p>
+    <div class="autores-grid">
+      <div class="autor-card">
+        <div class="autor-emoji">🧠</div>
+        <h4>Jean Piaget</h4>
+        <p>El aprendizaje es un proceso activo y constructivo. El estudiante construye su conocimiento a partir de la interacción con el entorno; la evaluación debe dar cuenta de ese proceso de construcción, no solo de su resultado final.</p>
+      </div>
+      <div class="autor-card">
+        <div class="autor-emoji">🤝</div>
+        <h4>Lev Vygotsky</h4>
+        <p>La zona de desarrollo próximo revela que lo que un estudiante puede lograr con apoyo hoy es lo que logrará solo mañana. Evaluar es, entonces, acompañar ese tránsito con sensibilidad pedagógica y mediación intencional.</p>
+      </div>
+      <div class="autor-card">
+        <div class="autor-emoji">✊</div>
+        <h4>Paulo Freire</h4>
+        <p>La evaluación liberadora es un acto dialógico, no punitivo. Frente a la "educación bancaria", propone una evaluación que parte del reconocimiento del otro como ser crítico, capaz de nombrar su mundo y transformarlo.</p>
+      </div>
+      <div class="autor-card">
+        <div class="autor-emoji">🌐</div>
+        <h4>DUA – Diseño Universal</h4>
+        <p>El DUA (CAST, 2018) propone tres principios: múltiples formas de representación, acción y expresión, y motivación. Evaluar desde el DUA significa eliminar las barreras y construir caminos diversos hacia el aprendizaje.</p>
+      </div>
+      <div class="autor-card">
+        <div class="autor-emoji">⚖️</div>
+        <h4>Dec. 1290 de 2009</h4>
+        <p>Marco legal colombiano que otorga autonomía a las instituciones educativas para definir sus sistemas de evaluación, centrados en el desarrollo integral del estudiante y la valoración de sus procesos de aprendizaje.</p>
+      </div>
+      <div class="autor-card">
+        <div class="autor-emoji">🏛️</div>
+        <h4>Michel Foucault</h4>
+        <p>El examen como dispositivo de poder-saber normaliza, compara y excluye. Comprender esta dimensión política de la evaluación permite al docente ser agente de resistencia y transformación dentro del sistema.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CASO INSPIRADOR -->
+<section id="caso">
+  <div class="container">
+    <span class="section-label" style="background:rgba(255,255,255,0.15); color:#b7e4c7;">Contextualización</span>
+    <h2 class="section-title">Caso <span style="color:#d4a843;">Inspirador</span></h2>
+    <div class="divider" style="background:linear-gradient(90deg, #b7e4c7, #d4a843);"></div>
+    <div class="caso-box">
+      <div class="caso-tag">Caso Real · Grado 6° · Institución Educativa Pública</div>
+      <h3>📚 "Valentina no habla en clase, pero dibuja mundos enteros"</h3>
+      <p>Valentina es una estudiante de sexto grado en una institución pública de Medellín. Siempre fue silenciosa en clase. Sus docentes interpretaban ese silencio como desinterés o falta de comprensión, y sus notas lo reflejaban: raspaba con un 3.0 cada período. Sin embargo, en el recreo, Valentina llenaba cuadernos enteros con ilustraciones detalladas de los temas vistos en clase: representaba los ecosistemas en mapas visuales, narr aba la historia con personajes dibujados a mano, conectaba conceptos matemáticos con figuras geométricas que construía en papel.</p>
+      <p>Un día, su profesora de Ciencias Naturales, en lugar de aplicar el examen escrito habitual, les pidió a todos que "mostraran lo que habían aprendido como quisieran". Valentina presentó un diario visual de la célula: una obra de arte pedagógica que dejó a la docente sin palabras. Ese 5.0 no solo transformó la nota de Valentina: transformó la forma en que la profesora entendió la evaluación.</p>
+      <p><strong style="color:#b7e4c7;">Este caso inspiró la técnica de Observación Pedagógica y los instrumentos diseñados en este blog,</strong> convencidos de que la diversidad de formas de aprender exige una diversidad de formas de evaluar.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TÉCNICA -->
+<section id="tecnica">
+  <div class="container">
+    <span class="section-label">El Durante · Fase 2</span>
+    <h2 class="section-title">Técnica de <span>Evaluación</span></h2>
+    <div class="divider"></div>
+    <div class="tecnica-box">
+      <h3>🔍 Técnica: Observación Pedagógica</h3>
+      <p>La <strong>Observación Pedagógica</strong> es una técnica de evaluación cualitativa que permite al docente recoger información directa, sistemática y contextualizada sobre los procesos de aprendizaje de los estudiantes durante el desarrollo de actividades reales en el aula. A diferencia del examen, la observación capta dimensiones cognitivas, emocionales, sociales y procedimentales del aprendizaje en situación.</p>
+      <p>Esta técnica es especialmente poderosa para visibilizar aquellos aprendizajes que el examen escrito no logra capturar: la colaboración entre pares, la resolución creativa de problemas, la comunicación no verbal, el proceso de pensamiento y la participación oral espontánea.</p>
+      <p>En coherencia con el DUA, la observación pedagógica reconoce que los estudiantes demuestran sus saberes de múltiples maneras, y el docente está llamado a leer esas expresiones diversas con ojos abiertos, sensibles y libres de prejuicios evaluativos.</p>
+      <div class="momentos">
+        <div class="momento">
+          <div class="emoji">📋</div>
+          <h5>1. Preparación</h5>
+          <p>Definir los indicadores de observación, diseñar el instrumento, establecer el contexto y comunicar el propósito a los estudiantes.</p>
+        </div>
+        <div class="momento">
+          <div class="emoji">👁️</div>
+          <h5>2. Desarrollo</h5>
+          <p>Ejecutar la observación durante la actividad, registrar de forma sistemática, evitar interrupciones y capturar evidencias diversas.</p>
+        </div>
+        <div class="momento">
+          <div class="emoji">💬</div>
+          <h5>3. Valoración</h5>
+          <p>Analizar los registros, retroalimentar al estudiante de forma dialógica, tomar decisiones pedagógicas y ajustar la práctica.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTRUMENTOS -->
+<section id="instrumentos">
+  <div class="container-wide" style="max-width:960px; margin:0 auto; padding:0 24px;">
+    <span class="section-label">El Corazón del Blog</span>
+    <h2 class="section-title" style="max-width:960px; margin:0 auto 8px;">Instrumentos de <span>Evaluación</span></h2>
+    <div class="divider"></div>
+
+    <!-- INSTRUMENTO 1: TRADICIONAL -->
+    <div class="instrumento">
+      <div class="instr-header verde">
+        <div class="instr-num">1</div>
+        <div class="instr-header-text">
+          <h3>Diario Pedagógico del Docente</h3>
+          <p>Instrumento Tradicional · Observación sistemática con registro escrito</p>
+        </div>
+      </div>
+      <div class="instr-body">
+        <div class="ficha-grid">
+          <div class="ficha-item"><div class="label">Asignatura</div><div class="val">Ciencias Naturales</div></div>
+          <div class="ficha-item"><div class="label">Grado</div><div class="val">6° Básica Secundaria</div></div>
+          <div class="ficha-item"><div class="label">Tema</div><div class="val">La célula y sus funciones</div></div>
+          <div class="ficha-item"><div class="label">Competencia</div><div class="val">Indagación científica</div></div>
+          <div class="ficha-item"><div class="label">DBA</div><div class="val">DBA 3 · Grado 6°</div></div>
+          <div class="ficha-item"><div class="label">EBC</div><div class="val">Ciencias Naturales MEN</div></div>
+        </div>
+        <h4>📄 Descripción del Instrumento</h4>
+        <p>El Diario Pedagógico es un instrumento clásico de registro narrativo en el cual el docente consigna, de manera sistemática y reflexiva, sus observaciones sobre el proceso de aprendizaje de los estudiantes durante el desarrollo de una clase o unidad didáctica. Hereda la tradición de la observación participante de las ciencias sociales y su valor reside en la riqueza cualitativa del registro contextualizado.</p>
+        <h4>📝 Indicadores de Observación</h4>
+        <ul>
+          <li>Participación activa del estudiante en las actividades propuestas.</li>
+          <li>Capacidad para relacionar conceptos nuevos con saberes previos sobre la célula.</li>
+          <li>Uso adecuado del vocabulario científico básico.</li>
+          <li>Actitud hacia el trabajo colaborativo y la escucha activa.</li>
+          <li>Formulación de preguntas que evidencien curiosidad científica.</li>
+          <li>Avance progresivo en la comprensión del concepto de célula y sus organelos.</li>
+        </ul>
+        <div class="instr-momentos">
+          <div class="instr-momento"><div class="m-title">🔹 Preparación</div><p>El docente diseña los indicadores de observación y prepara el formato de registro antes de la clase.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Desarrollo</div><p>Durante la clase, el docente observa y registra en el diario comportamientos, participaciones y producciones destacadas.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Valoración</div><p>Al finalizar la unidad, el docente sistematiza sus anotaciones y genera retroalimentación cualitativa individualizada.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTRUMENTO 2: DUA -->
+    <div class="instrumento">
+      <div class="instr-header dorado">
+        <div class="instr-num">2</div>
+        <div class="instr-header-text">
+          <h3>Portafolio de Expresiones Diversas</h3>
+          <p>Instrumento DUA · Diseño Universal para el Aprendizaje</p>
+        </div>
+      </div>
+      <div class="instr-body">
+        <div class="ficha-grid">
+          <div class="ficha-item"><div class="label">Asignatura</div><div class="val">Ciencias Naturales</div></div>
+          <div class="ficha-item"><div class="label">Grado</div><div class="val">6° Básica Secundaria</div></div>
+          <div class="ficha-item"><div class="label">Tema</div><div class="val">La célula y sus funciones</div></div>
+          <div class="ficha-item"><div class="label">Competencia</div><div class="val">Uso comprensivo del conocimiento</div></div>
+          <div class="ficha-item"><div class="label">DBA</div><div class="val">DBA 3 · Grado 6°</div></div>
+          <div class="ficha-item"><div class="label">EBC</div><div class="val">Ciencias Naturales MEN</div></div>
+        </div>
+        <h4>📄 Descripción del Instrumento</h4>
+        <p>El Portafolio de Expresiones Diversas es un instrumento fundamentado en los tres principios del Diseño Universal para el Aprendizaje (DUA): múltiples medios de representación, múltiples medios de acción y expresión, y múltiples medios de motivación y compromiso. Cada estudiante elige cómo evidenciar su aprendizaje sobre la célula, garantizando que todos tengan la oportunidad real de demostrar sus saberes.</p>
+        <div class="dua-chips">
+          <span class="dua-chip">🎨 Dibujo ilustrado</span>
+          <span class="dua-chip">🎙️ Grabación de audio</span>
+          <span class="dua-chip">🎬 Video explicativo</span>
+          <span class="dua-chip">📖 Texto narrativo</span>
+          <span class="dua-chip">🏗️ Maqueta 3D</span>
+          <span class="dua-chip">🎭 Dramatización</span>
+          <span class="dua-chip">🗺️ Mapa conceptual</span>
+          <span class="dua-chip">💻 Presentación digital</span>
+        </div>
+        <h4>🌐 Principios DUA Aplicados</h4>
+        <ul>
+          <li><strong>Representación:</strong> El docente presenta el tema sobre la célula usando texto, imágenes, video y manipulables físicos.</li>
+          <li><strong>Acción y Expresión:</strong> El estudiante elige libremente el formato para demostrar su comprensión.</li>
+          <li><strong>Motivación:</strong> Se promueven procesos de autoevaluación y coevaluación respetuosos que refuerzan la autonomía y la autoeficacia.</li>
+        </ul>
+        <div class="instr-momentos">
+          <div class="instr-momento"><div class="m-title">🔹 Preparación</div><p>El docente presenta las opciones de expresión y los criterios de valoración. Los estudiantes eligen su formato preferido.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Desarrollo</div><p>Los estudiantes construyen su evidencia de aprendizaje durante 2 sesiones, con acompañamiento y retroalimentación constante.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Valoración</div><p>Se realiza una galería de aprendizaje donde los estudiantes comparten sus producciones y se coevalúan con lenguaje positivo.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTRUMENTO 3: INNOVADOR 1 -->
+    <div class="instrumento">
+      <div class="instr-header azul">
+        <div class="instr-num">3</div>
+        <div class="instr-header-text">
+          <h3>Podcast Científico Estudiantil</h3>
+          <p>Instrumento Innovador · Expresión oral digital</p>
+        </div>
+      </div>
+      <div class="instr-body">
+        <span class="inno-badge">🚀 Innovador y Creativo</span>
+        <div class="ficha-grid">
+          <div class="ficha-item"><div class="label">Asignatura</div><div class="val">Ciencias Naturales</div></div>
+          <div class="ficha-item"><div class="label">Grado</div><div class="val">6° Básica Secundaria</div></div>
+          <div class="ficha-item"><div class="label">Tema</div><div class="val">La célula y sus funciones</div></div>
+          <div class="ficha-item"><div class="label">Competencia</div><div class="val">Comunicación científica</div></div>
+          <div class="ficha-item"><div class="label">DBA</div><div class="val">DBA 3 · Grado 6°</div></div>
+          <div class="ficha-item"><div class="label">EBC</div><div class="val">Ciencias Naturales MEN</div></div>
+        </div>
+        <h4>📄 Descripción del Instrumento</h4>
+        <p>El Podcast Científico Estudiantil es un instrumento de evaluación innovador que invita a los estudiantes a crear un episodio de podcast donde explican, de forma oral y creativa, los conceptos sobre la célula aprendidos durante la unidad. Utilizando aplicaciones gratuitas como Anchor, Spreaker Studio o incluso notas de voz del celular, los estudiantes se convierten en comunicadores científicos.</p>
+        <p>Este instrumento rompe con la hegemonía del texto escrito como única forma de demostrar conocimiento, valida la oralidad y la narrativa como modos legítimos del saber científico, y desarrolla competencias comunicativas y digitales fundamentales para el siglo XXI.</p>
+        <h4>🎙️ Criterios de Valoración del Podcast</h4>
+        <ul>
+          <li>Claridad y precisión conceptual sobre la célula y sus organelos.</li>
+          <li>Capacidad para explicar con lenguaje propio y accesible (sin leer textualmente).</li>
+          <li>Creatividad en el formato: introducción, desarrollo, cierre, efectos de sonido opcionales.</li>
+          <li>Duración adecuada: entre 3 y 6 minutos.</li>
+          <li>Inclusión de al menos una pregunta reflexiva para el oyente.</li>
+        </ul>
+        <div class="instr-momentos">
+          <div class="instr-momento"><div class="m-title">🔹 Preparación</div><p>El docente presenta ejemplos de podcasts científicos. Los estudiantes escuchan, analizan la estructura y diseñan un guión borrador.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Desarrollo</div><p>Por parejas o individualmente, los estudiantes graban su podcast. Se permite una toma de práctica antes del registro definitivo.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Valoración</div><p>Se realiza un "Festival del Podcast" donde se escuchan las producciones y los compañeros ofrecen retroalimentación positiva y constructiva.</p></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- INSTRUMENTO 4: INNOVADOR 2 -->
+    <div class="instrumento">
+      <div class="instr-header violeta">
+        <div class="instr-num">4</div>
+        <div class="instr-header-text">
+          <h3>Bitácora Visual de Aprendizaje</h3>
+          <p>Instrumento Innovador · Narrativa gráfica y reflexión metacognitiva</p>
+        </div>
+      </div>
+      <div class="instr-body">
+        <span class="inno-badge">🚀 Innovador y Creativo</span>
+        <div class="ficha-grid">
+          <div class="ficha-item"><div class="label">Asignatura</div><div class="val">Ciencias Naturales</div></div>
+          <div class="ficha-item"><div class="label">Grado</div><div class="val">6° Básica Secundaria</div></div>
+          <div class="ficha-item"><div class="label">Tema</div><div class="val">La célula y sus funciones</div></div>
+          <div class="ficha-item"><div class="label">Competencia</div><div class="val">Metacognición y autorregulación</div></div>
+          <div class="ficha-item"><div class="label">DBA</div><div class="val">DBA 3 · Grado 6°</div></div>
+          <div class="ficha-item"><div class="label">EBC</div><div class="val">Ciencias Naturales MEN</div></div>
+        </div>
+        <h4>📄 Descripción del Instrumento</h4>
+        <p>La Bitácora Visual de Aprendizaje es un cuaderno o carpeta personal —físico o digital— donde el estudiante registra, a través de imágenes, colores, esquemas, palabras clave y reflexiones breves, el recorrido de su aprendizaje sobre la célula a lo largo de toda la unidad didáctica. No es un cuaderno de notas convencional: es un diario metacognitivo donde el estudiante toma conciencia de su propio proceso de aprender.</p>
+        <p>Inspirado en los "sketchnotes" y el Visual Thinking, este instrumento integra expresión artística, pensamiento sistémico y reflexión emocional, reconociendo que aprender no es solo acumular información, sino conectarla con la propia vida, asombrarse y hacerse preguntas.</p>
+        <h4>🖊️ Elementos que debe incluir la Bitácora</h4>
+        <ul>
+          <li><strong>Página de inicio:</strong> "¿Qué sé y qué siento sobre la célula antes de comenzar?"</li>
+          <li><strong>Mapa visual:</strong> Representación gráfica de los organelos celulares y sus funciones.</li>
+          <li><strong>Conexión con la vida:</strong> "¿Dónde veo la célula en mi cotidianidad?"</li>
+          <li><strong>Momentos de duda:</strong> Registro de preguntas que surgieron durante el proceso.</li>
+          <li><strong>Página de cierre:</strong> "¿Cómo cambió mi forma de ver lo que aprendí?"</li>
+        </ul>
+        <div class="instr-momentos">
+          <div class="instr-momento"><div class="m-title">🔹 Preparación</div><p>El docente presenta ejemplos de bitácoras visuales y orienta sobre el uso del color, el esquema y la reflexión como herramientas de aprendizaje.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Desarrollo</div><p>El estudiante va construyendo su bitácora de forma paralela al desarrollo de la unidad, con entradas progresivas en cada sesión.</p></div>
+          <div class="instr-momento"><div class="m-title">🔹 Valoración</div><p>Al finalizar, el estudiante presenta su bitácora al docente en una conversación de 5 minutos donde explica sus elecciones y reflexiones. Se autoevalúa con preguntas abiertas.</p></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONCLUSIONES -->
+<section id="conclusiones">
+  <div class="container">
+    <span class="section-label">El Después · Fase 3</span>
+    <h2 class="section-title">Conclusiones de la <span>Experiencia</span></h2>
+    <div class="divider"></div>
+    <p style="color:var(--texto-claro); max-width:680px; margin-bottom:8px;">La construcción de este blog ha sido en sí misma un acto de aprendizaje significativo. Estas son las reflexiones que emergen de ese proceso:</p>
+    <div class="concl-grid">
+      <div class="concl-card">
+        <div class="icon">🪞</div>
+        <h4>La evaluación nos revela como docentes</h4>
+        <p>Diseñar instrumentos de evaluación exige confrontarse con los propios prejuicios pedagógicos. Este ejercicio evidenció que evaluar es, antes que nada, un acto ético que dice mucho de quienes somos como educadores.</p>
+      </div>
+      <div class="concl-card">
+        <div class="icon">🌈</div>
+        <h4>La diversidad enriquece el aprendizaje</h4>
+        <p>Trabajar desde el DUA confirmó que las diferencias entre estudiantes no son un problema a resolver, sino la materia prima de una educación más rica, creativa y profundamente humana.</p>
+      </div>
+      <div class="concl-card">
+        <div class="icon">🔓</div>
+        <h4>Evaluar puede liberar</h4>
+        <p>Siguiendo a Freire, este blog demostró que la evaluación puede ser un acto de reconocimiento y liberación cuando parte del diálogo, el respeto y la convicción en el potencial del otro.</p>
+      </div>
+      <div class="concl-card">
+        <div class="icon">💡</div>
+        <h4>Lo digital amplía las posibilidades</h4>
+        <p>El entorno digital ofrece posibilidades sin precedentes para crear instrumentos accesibles, inclusivos y motivadores. La tecnología, al servicio de la pedagogía, puede ser una poderosa herramienta de equidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REFERENCIAS -->
+<section id="referencias">
+  <div class="container">
+    <span class="section-label">Honestidad Académica</span>
+    <h2 class="section-title">Referencias <span>Bibliográficas</span></h2>
+    <div class="divider"></div>
+    <ul class="ref-list">
+      <li><strong>CAST (2018).</strong> Universal Design for Learning Guidelines version 2.2. Recuperado de http://udlguidelines.cast.org</li>
+      <li><strong>Decreto 1290 de 2009.</strong> Ministerio de Educación Nacional de Colombia. Por el cual se reglamenta la evaluación del aprendizaje y promoción de los estudiantes de los niveles de educación básica y media. Bogotá: MEN.</li>
+      <li><strong>Foucault, M. (1975).</strong> Vigilar y castigar: Nacimiento de la prisión. Siglo XXI Editores.</li>
+      <li><strong>Freire, P. (1970).</strong> Pedagogía del oprimido. Siglo XXI Editores.</li>
+      <li><strong>Ministerio de Educación Nacional. (2006).</strong> Estándares Básicos de Competencias en Ciencias Naturales y Ciencias Sociales. Bogotá: MEN.</li>
+      <li><strong>Ministerio de Educación Nacional. (2016).</strong> Derechos Básicos de Aprendizaje – Ciencias Naturales. Volumen 1. Bogotá: MEN.</li>
+      <li><strong>Piaget, J. (1969).</strong> Psicología y pedagogía. Ariel.</li>
+      <li><strong>Vygotsky, L. S. (1978).</strong> Mind in society: The development of higher psychological processes. Harvard University Press.</li>
+      <li><strong>Wiggins, G. & McTighe, J. (2005).</strong> Understanding by Design. ASCD.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="logo">EvalúaVida</div>
+  <p>Blog de Evaluación · Universidad Católica Luis Amigó · Facultad de Educación y Humanidades</p>
+  <p style="margin-top:8px;">"La Evaluación como Ecosistema de Inclusión"</p>
+  <p style="margin-top:16px; font-size:0.8rem; opacity:0.5;">© 2025 · Creado como instrumento didáctico para el curso de Evaluación Educativa</p>
+</footer>
+
+</body>
+</html>
